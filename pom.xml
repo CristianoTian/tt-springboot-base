@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hy.tt</groupId>
+    <artifactId>tt-springboot-base</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>tt-springboot-base</name>
+    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>tt-springboot-demo</module>
+    </modules>
+
+    <distributionManagement>
+        <repository>
+            <id>forwardx-releases</id>
+            <name>forwardx-releases</name>
+            <url>http://47.95.232.150:8081/repository/forwardx-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>forwardx-snapshot</id>
+            <name>forwardx-snapshot</name>
+            <url>http://47.95.232.150:8081/repository/forwardx-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central</name>
+            <url>http://47.95.232.150:8081/nexus/content/repositories/central/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+</project>
