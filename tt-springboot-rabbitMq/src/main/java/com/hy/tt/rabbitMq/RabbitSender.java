@@ -1,9 +1,7 @@
 package com.hy.tt.rabbitMq;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -62,6 +60,29 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback {
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
         log.info("send: " + correlationData.getId());
         this.rabbitTemplate.convertAndSend(exchange, routeKey , obj, correlationData);
+    }
+
+    /**
+     *
+     * @param obj
+     */
+    public void sendRabbitmqFanout(String exchange,Object obj) {
+
+        if(null == rabbitAdmin.getQueueProperties(RabbitUtil.QUEUE_FANOUT_ONE) || null == rabbitAdmin.getQueueProperties(RabbitUtil.QUEUE_FANOUT_TWO)){
+            FanoutExchange fanoutExchange = new FanoutExchange(exchange);
+            Queue queue1 = new Queue(RabbitUtil.QUEUE_FANOUT_ONE);
+            Queue queue2 = new Queue(RabbitUtil.QUEUE_FANOUT_TWO);
+            rabbitAdmin.declareExchange(fanoutExchange);
+            rabbitAdmin.declareQueue(queue1);
+            rabbitAdmin.declareQueue(queue2);
+            rabbitAdmin.declareBinding(BindingBuilder.bind(queue1).to(fanoutExchange));
+            rabbitAdmin.declareBinding(BindingBuilder.bind(queue2).to(fanoutExchange));
+        }
+
+
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        log.info("send: " + correlationData.getId());
+        this.rabbitTemplate.convertAndSend(exchange,"", obj, correlationData);
     }
 
 }

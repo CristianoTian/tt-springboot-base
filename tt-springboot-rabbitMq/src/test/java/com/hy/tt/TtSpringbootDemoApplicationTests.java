@@ -15,9 +15,14 @@ public class TtSpringbootDemoApplicationTests {
     @Autowired
     private RabbitSender rabbitSender;
 
+//    @Test
+//    public void contextLoads() {
+//        rabbitSender.sendRabbitmqDirect(RabbitUtil.EXCHANGE_TWO,RabbitUtil.QUEUE_TWO,RabbitUtil.ROUTE_TWO,"Hello RabbitMq TWO");
+//    }
+
     @Test
     public void contextLoads() {
-        rabbitSender.sendRabbitmqDirect(RabbitUtil.EXCHANGE_TWO,RabbitUtil.QUEUE_TWO,RabbitUtil.ROUTE_TWO,"Hello RabbitMq TWO");
+        rabbitSender.sendRabbitmqFanout(RabbitUtil.EXCHANGE_FANOUT,"Hello RabbitMq FANOUT!");
     }
 
 }

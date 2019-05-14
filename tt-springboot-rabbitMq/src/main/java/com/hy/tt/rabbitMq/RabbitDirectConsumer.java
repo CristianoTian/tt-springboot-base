@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RabbitListener(queues = RabbitUtil.QUEUE_TWO)//由于TWO 是通过生产者自动生成的 ,所以第一次启动注释掉消费者 ,或者手动创建
-public class RabbitConsumer {
+public class RabbitDirectConsumer {
 
     @RabbitHandler
     public void message(String content){

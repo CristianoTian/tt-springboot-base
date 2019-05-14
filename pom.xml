@@ -10,7 +10,7 @@
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>tt-springboot-demo</module>
+        <module>tt-springboot-rabbitMq</module>
     </modules>
 
     <distributionManagement>

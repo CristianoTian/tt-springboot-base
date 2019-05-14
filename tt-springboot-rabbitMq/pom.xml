@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hy.tt</groupId>
-    <artifactId>tt-springboot-demo</artifactId>
+    <artifactId>tt-springboot-rabbitMq</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>tt-springboot-demo</name>
+    <name>tt-springboot-rabbitMq</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
