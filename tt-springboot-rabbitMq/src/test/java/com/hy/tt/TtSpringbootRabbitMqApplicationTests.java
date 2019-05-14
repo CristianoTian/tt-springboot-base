@@ -15,10 +15,10 @@ public class TtSpringbootRabbitMqApplicationTests {
     @Autowired
     private RabbitSender rabbitSender;
 
-//    @Test
-//    public void contextLoads() {
-//        rabbitSender.sendRabbitmqDirect(RabbitUtil.EXCHANGE_TWO,RabbitUtil.QUEUE_TWO,RabbitUtil.ROUTE_TWO,"Hello RabbitMq TWO");
-//    }
+    @Test
+    public void contextLoads() {
+        rabbitSender.sendRabbitmqDirect(RabbitUtil.EXCHANGE_TWO,RabbitUtil.QUEUE_TWO,RabbitUtil.ROUTE_TWO,"Hello RabbitMq TWO11");
+    }
 
 //    @Test
 //    public void contextLoads() {
@@ -26,13 +26,13 @@ public class TtSpringbootRabbitMqApplicationTests {
 //    }
 
 
-    /**
-     * routingkey  topic.aaa  3个Listener 都执行
-     *              topic.aaa.nn   只有配置.#的执行
-     */
-    @Test
-    public void contextLoads() {
-
-        rabbitSender.sendRabbitTopic(RabbitUtil.EXCHANGE_TOPIC,"topic.aa.bb","Hello RabbitMq FANOUT!");
-    }
+//    /**
+//     * routingkey  topic.aaa  3个Listener 都执行
+//     *              topic.aaa.nn   只有配置.#的执行
+//     */
+//    @Test
+//    public void contextLoads() {
+//
+//        rabbitSender.sendRabbitTopic(RabbitUtil.EXCHANGE_TOPIC,"topic.aa.bb","Hello RabbitMq FANOUT!");
+//    }
 }

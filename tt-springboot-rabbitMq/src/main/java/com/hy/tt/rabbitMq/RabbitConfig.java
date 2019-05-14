@@ -6,15 +6,21 @@ package com.hy.tt.rabbitMq;
  */
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.env.Environment;
 
 /**
  Broker:它提供一种传输服务,它的角色就是维护一条从生产者到消费者的路线，保证数据能按照指定的方式进行传输,
@@ -30,6 +36,11 @@ import org.springframework.context.annotation.Scope;
 @Slf4j
 @Configuration
 public class RabbitConfig {
+
+    @Autowired
+    private Environment env;
+    @Autowired
+    private SimpleRabbitListenerContainerFactoryConfigurer factoryConfigurer;
 
     @Value("${spring.rabbitmq.host}")
     private String host;
@@ -68,5 +79,41 @@ public class RabbitConfig {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
         return rabbitTemplate;
     }
+
+    /**
+     * 单一消费者
+     * @return
+     */
+    @Bean(name = "singleListenerContainer")
+    public SimpleRabbitListenerContainerFactory listenerContainer(){
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory());
+//        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setConcurrentConsumers(1);
+        factory.setMaxConcurrentConsumers(1);
+        factory.setPrefetchCount(1);
+        factory.setTxSize(1);
+        factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
+        return factory;
+    }
+
+
+    /**
+     * 多个消费者
+     * @return
+     */
+    @Bean(name = "multiListenerContainer")
+    public SimpleRabbitListenerContainerFactory multiListenerContainer(){
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factoryConfigurer.configure(factory,connectionFactory());
+//        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setAcknowledgeMode(AcknowledgeMode.NONE);
+        factory.setConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.concurrency",int.class));
+        factory.setMaxConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.max-concurrency",int.class));
+        factory.setPrefetchCount(env.getProperty("spring.rabbitmq.listener.prefetch",int.class));
+        return factory;
+    }
+
+
 
 }
