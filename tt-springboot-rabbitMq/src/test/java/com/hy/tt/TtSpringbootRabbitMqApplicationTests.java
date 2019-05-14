@@ -20,9 +20,19 @@ public class TtSpringbootRabbitMqApplicationTests {
 //        rabbitSender.sendRabbitmqDirect(RabbitUtil.EXCHANGE_TWO,RabbitUtil.QUEUE_TWO,RabbitUtil.ROUTE_TWO,"Hello RabbitMq TWO");
 //    }
 
+//    @Test
+//    public void contextLoads() {
+//        rabbitSender.sendRabbitmqFanout(RabbitUtil.EXCHANGE_FANOUT,"Hello RabbitMq FANOUT!");
+//    }
+
+
+    /**
+     * routingkey  topic.aaa  3个Listener 都执行
+     *              topic.aaa.nn   只有配置.#的执行
+     */
     @Test
     public void contextLoads() {
-        rabbitSender.sendRabbitmqFanout(RabbitUtil.EXCHANGE_FANOUT,"Hello RabbitMq FANOUT!");
-    }
 
+        rabbitSender.sendRabbitTopic(RabbitUtil.EXCHANGE_TOPIC,"topic.aa.bb","Hello RabbitMq FANOUT!");
+    }
 }

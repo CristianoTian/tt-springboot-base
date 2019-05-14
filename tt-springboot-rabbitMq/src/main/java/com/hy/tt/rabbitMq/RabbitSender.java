@@ -32,7 +32,6 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback {
         this.rabbitTemplate.setConfirmCallback(this);
     }
 
-
     @Override
     public void confirm(CorrelationData correlationData, boolean b, String s) {
         log.info("confirm: " + correlationData.getId());
@@ -44,9 +43,7 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback {
     }
 
     /**
-     * 发送到 指定routekey的指定queue
-     * @param routeKey
-     * @param obj
+     * Direct模式
      */
     public void sendRabbitmqDirect(String exchange, String queue, String routeKey,Object obj) {
 
@@ -63,8 +60,7 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback {
     }
 
     /**
-     *
-     * @param obj
+     * Fanout 模式
      */
     public void sendRabbitmqFanout(String exchange,Object obj) {
 
@@ -84,5 +80,33 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback {
         log.info("send: " + correlationData.getId());
         this.rabbitTemplate.convertAndSend(exchange,"", obj, correlationData);
     }
+
+    /**
+     * Topic 模式
+     */
+    public void sendRabbitTopic(String exchange, String routingKey,Object obj){
+
+        if(null == rabbitAdmin.getQueueProperties(RabbitUtil.QUEUE_TOPIC_ONE)
+                || null == rabbitAdmin.getQueueProperties(RabbitUtil.QUEUE_TOPIC_TWO)
+                || null == rabbitAdmin.getQueueProperties(RabbitUtil.QUEUE_TOPIC_THREE)
+        ){
+            TopicExchange topicExchange = new TopicExchange(exchange);
+            Queue queue1 = new Queue(RabbitUtil.QUEUE_TOPIC_ONE);
+            Queue queue2 = new Queue(RabbitUtil.QUEUE_TOPIC_TWO);
+            Queue queue3 = new Queue(RabbitUtil.QUEUE_TOPIC_THREE);
+            rabbitAdmin.declareExchange(topicExchange);
+            rabbitAdmin.declareQueue(queue1);
+            rabbitAdmin.declareQueue(queue2);
+            rabbitAdmin.declareQueue(queue3);
+            rabbitAdmin.declareBinding(BindingBuilder.bind(queue1).to(topicExchange).with(RabbitUtil.ROUKTING_KEY_TOPIC));
+            rabbitAdmin.declareBinding(BindingBuilder.bind(queue2).to(topicExchange).with(RabbitUtil.ROUKTING_KEY_TOPIC));
+            rabbitAdmin.declareBinding(BindingBuilder.bind(queue3).to(topicExchange).with(RabbitUtil.ROUKTING_KEY_TOPIC_ONE));
+        }
+
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        log.info("send: " + correlationData.getId());
+        this.rabbitTemplate.convertAndSend(exchange,routingKey, obj, correlationData);
+    }
+
 
 }
