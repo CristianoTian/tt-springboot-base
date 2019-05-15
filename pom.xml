@@ -15,6 +15,8 @@
 
     <modules>
         <module>tt-springboot-rabbitMq</module>
+        <module>tt-springboot-starter</module>
+        <module>tt-springboot-starter-demo</module>
     </modules>
 
     <distributionManagement>
