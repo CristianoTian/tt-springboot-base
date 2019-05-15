@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @date 2019/5/15
  */
 @Component
-//@PropertySource("classpath:config/my.prop") 可以指定读取配置文件
+//@PropertySource("classpath:config/my.prop") 11可以指定读取配置文件
 @ConfigurationProperties(prefix = "tt")
 public class StarterHelloProperties {
 
