@@ -22,5 +22,6 @@ springBoot 集成demo开发
       
 3)集成redis开发
 
-    I.
+    Ⅰ.注意,默认是使用LettuceConnectionConfiguration加载连接池,配置前缀spring.redis.
+    Ⅱ.可以自定义连接池,开启事务,选择哨兵或者分布式模式等
     
