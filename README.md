@@ -19,4 +19,8 @@ springBoot 集成demo开发
     Step two: 创建逻辑实现类
     Step three: 配置自动注入Config
     Step four: 自定义META-INF --- spring.factories
+      
+3)集成redis开发
+
+    I.
     
