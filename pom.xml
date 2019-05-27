@@ -18,6 +18,7 @@
         <module>tt-springboot-redis</module>
         <module>tt-springboot-starter</module>
         <module>tt-springboot-starter-demo</module>
+        <module>tt-springboot-jwt</module>
     </modules>
 
     <distributionManagement>
