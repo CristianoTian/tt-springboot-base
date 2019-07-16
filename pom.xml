@@ -19,6 +19,7 @@
         <module>tt-springboot-starter</module>
         <module>tt-springboot-starter-demo</module>
         <module>tt-springboot-jwt</module>
+        <module>tt-springboot-shardingjdbc</module>
     </modules>
 
     <distributionManagement>
