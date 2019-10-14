@@ -28,7 +28,7 @@ public class DriverConfig {
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         driverManagerDataSource.setUrl("jdbc:mysql://40.73.24.255:3306/cluster_system");
         driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("aPCqY)fsi1YE124d");
+        driverManagerDataSource.setPassword("");
 
         TransactionFactory transactionFactory  = new JdbcTransactionFactory();
 
