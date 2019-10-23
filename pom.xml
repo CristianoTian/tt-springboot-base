@@ -5,6 +5,7 @@
 
     <groupId>com.hy.tt</groupId>
     <artifactId>tt-springboot-base</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>tt-springboot-base</name>
     <description>Demo project for Spring Boot</description>
@@ -20,6 +21,7 @@
         <module>tt-springboot-starter-demo</module>
         <module>tt-springboot-jwt</module>
         <module>tt-springboot-shardingjdbc</module>
+        <module>tt-spring-mvcToboot</module>
     </modules>
 
     <distributionManagement>
