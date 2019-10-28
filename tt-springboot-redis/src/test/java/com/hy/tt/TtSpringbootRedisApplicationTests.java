@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,21 @@ public class TtSpringbootRedisApplicationTests {
 //        System.out.println("get redis value:" + value.toString());
 //    }
 
+
+
+    @Test
+    public void nearly(){
+        String key = "t";
+        redisUtil.geoAdd(key,116.40,39.90,"蜘蛛侠");
+        redisUtil.geoAdd(key,116.40,39.90,"蝙蝠侠");
+        redisUtil.geoAdd(key,116.38,39.90,"大侠");
+        redisUtil.geoAdd(key,116.30,39.95,"煎饼侠");
+
+
+        redisUtil.geoPos(key,"蜘蛛侠",20000);
+
+        redisUtil.geoPosWithDist(key,"蜘蛛侠",20000);
+    }
 
 
 }
