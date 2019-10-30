@@ -22,6 +22,7 @@
         <module>tt-springboot-jwt</module>
         <module>tt-springboot-shardingjdbc</module>
         <module>tt-spring-mvcToboot</module>
+        <module>tt-springboot-async</module>
     </modules>
 
     <distributionManagement>
