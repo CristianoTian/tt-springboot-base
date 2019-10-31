@@ -1,6 +1,6 @@
-package com.hy.tt.strategyMode.config;
+package com.hy.tt.mode.strategy.config;
 
-import com.hy.tt.strategyMode.util.BeanTool;
+import com.hy.tt.mode.strategy.util.BeanTool;
 
 import java.util.Map;
 

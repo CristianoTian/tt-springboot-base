@@ -1,6 +1,6 @@
-package com.hy.tt.strategyMode.config;
+package com.hy.tt.mode.strategy.config;
 
-import com.hy.tt.strategyMode.util.ClassScaner;
+import com.hy.tt.mode.strategy.util.ClassScaner;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;

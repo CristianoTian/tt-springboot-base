@@ -1,7 +1,7 @@
-package com.hy.tt.strategyMode.service;
+package com.hy.tt.mode.strategy.service;
 
-import com.hy.tt.strategyMode.config.AbstractHello;
-import com.hy.tt.strategyMode.config.HandlerContext;
+import com.hy.tt.mode.strategy.config.AbstractHello;
+import com.hy.tt.mode.strategy.config.HandlerContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

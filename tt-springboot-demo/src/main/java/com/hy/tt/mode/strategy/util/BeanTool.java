@@ -1,4 +1,4 @@
-package com.hy.tt.strategyMode.util;
+package com.hy.tt.mode.strategy.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

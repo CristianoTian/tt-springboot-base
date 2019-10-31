@@ -1,4 +1,4 @@
-package com.hy.tt.strategyMode.util;
+package com.hy.tt.mode.strategy.util;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.BeanDefinitionStoreException;

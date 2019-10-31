@@ -1,4 +1,4 @@
-package com.hy.tt.strategyMode.config;
+package com.hy.tt.mode.strategy.config;
 
 
 import java.lang.annotation.*;

@@ -1,6 +1,6 @@
-package com.hy.tt.strategyMode.controller;
+package com.hy.tt.mode.strategy.controller;
 
-import com.hy.tt.strategyMode.service.HelloServiceImpl;
+import com.hy.tt.mode.strategy.service.HelloServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

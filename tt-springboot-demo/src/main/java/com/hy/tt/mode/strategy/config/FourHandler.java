@@ -1,4 +1,4 @@
-package com.hy.tt.strategyMode.config;
+package com.hy.tt.mode.strategy.config;
 
 import org.springframework.stereotype.Component;
 
@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
  * @date 2019/9/20
  */
 @Component
-@NumType("2")
-public class SecondHandler  extends AbstractHello{
-
+@NumType("4")
+public class FourHandler extends AbstractHello {
     @Override
     public String say(String num) {
-        return "second";
+        return "four";
     }
 }

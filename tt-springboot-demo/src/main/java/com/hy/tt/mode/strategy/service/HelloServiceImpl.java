@@ -1,4 +1,4 @@
-package com.hy.tt.strategyMode.service;
+package com.hy.tt.mode.strategy.service;
 
 public interface HelloServiceImpl {
 
