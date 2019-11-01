@@ -23,6 +23,7 @@
         <module>tt-springboot-shardingjdbc</module>
         <module>tt-spring-mvcToboot</module>
         <module>tt-springboot-async</module>
+        <module>tt-spring</module>
     </modules>
 
 </project>
