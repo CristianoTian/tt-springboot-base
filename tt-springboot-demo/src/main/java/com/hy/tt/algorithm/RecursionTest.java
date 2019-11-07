@@ -7,7 +7,14 @@ package com.hy.tt.algorithm;
 public class RecursionTest {
 
     public static void main(String[] args) {
-        remove(4,'a','b','c');
+
+        String a = "abc";
+        String b = new String("abc");
+        String intern = b.intern();
+        System.out.println(a==b);
+        System.out.println(a==intern);
+        System.out.println(b==intern);
+//        remove(4,'a','b','c');
     }
 
     private static  void remove(int n,char a, char b, char c){
