@@ -84,6 +84,22 @@ public class SingleLinkListReversal {
     }
 
 
+    static Node reverseWhile(Node linkList){
+        if(linkList == null){
+            return linkList;
+        }
+        Node preNode = null;
+        Node nextNode ;
+        while(linkList != null){
+            nextNode = linkList.next;
+            linkList.next = preNode;
+            preNode = linkList;
+            linkList = nextNode;
+        }
+        return preNode;
+    }
+
+
     /**
      * 分组反转  12345678 --->  32165478
      * @param linkList
@@ -165,14 +181,15 @@ public class SingleLinkListReversal {
 //        Node reverse = reverse(linklist, 3);
 ////        Node reverse = reverse(knode);
 
-        Node reverse = handstandReverse(linklist, 3);
+//        Node reverse = handstandReverse(linklist, 3);
+        Node reverse = reverseWhile(linklist);
         System.out.println(reverse.toString());
         Node node = reverse.getNext();
         while(node != null){
             System.out.println(node.toString());
             node = node.next;
         }
-    }
 
+    }
 
 }
