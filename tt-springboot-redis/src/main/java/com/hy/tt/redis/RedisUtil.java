@@ -10,6 +10,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -103,6 +105,48 @@ public class RedisUtil {
             double value = next.getDistance().getValue();
             System.out.println(name1  + "|" + value);
         }
+    }
+
+
+    /**
+     * list 添加list 取出最近的10个
+     * 业务: 可以实现刷新关注列表等
+     * @param key
+     */
+    public void list(String key){
+        for (int i = 1; i < 15; i++) {
+            this.redisTemplate.opsForList().leftPush(key,i);
+        }
+        List<Object> range = this.redisTemplate.opsForList().range(key, 0, 9);
+        range.stream().forEach( r -> System.out.println(r));
+    }
+
+
+    /**
+     * 转盘中奖,点赞取消点赞等
+     * rem 取消
+     *
+     * @param key
+     */
+    public void set(String key){
+        this.redisTemplate.opsForSet().add(key, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+
+        Set<Object> members = this.redisTemplate.opsForSet().members(key);
+        members.stream().forEach( r -> System.out.println(r));
+
+        System.out.println("----------------------------------------");
+        List<Object> objects = this.redisTemplate.opsForSet().randomMembers(key, 3);
+        objects.stream().forEach( r -> System.out.println(r));
+
+        System.out.println("----------------------------------------");
+
+        List<Object> pop = this.redisTemplate.opsForSet().pop(key, 3);
+        pop.stream().forEach( r -> System.out.println(r));
+        System.out.println("----------------------------------------");
+
+        Set<Object> members1 = this.redisTemplate.opsForSet().members(key);
+        members1.stream().forEach( r -> System.out.println(r));
+
     }
 
 }

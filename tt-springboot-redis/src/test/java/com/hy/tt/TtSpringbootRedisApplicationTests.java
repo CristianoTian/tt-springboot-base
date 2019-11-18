@@ -41,18 +41,28 @@ public class TtSpringbootRedisApplicationTests {
 
 
 
+//    @Test
+//    public void nearly(){
+//        String key = "t";
+//        redisUtil.geoAdd(key,116.40,39.90,"蜘蛛侠");
+//        redisUtil.geoAdd(key,116.40,39.90,"蝙蝠侠");
+//        redisUtil.geoAdd(key,116.38,39.90,"大侠");
+//        redisUtil.geoAdd(key,116.30,39.95,"煎饼侠");
+//
+//
+//        redisUtil.geoPos(key,"蜘蛛侠",20000);
+//
+//        redisUtil.geoPosWithDist(key,"蜘蛛侠",20000);
+//    }
+
+
     @Test
-    public void nearly(){
-        String key = "t";
-        redisUtil.geoAdd(key,116.40,39.90,"蜘蛛侠");
-        redisUtil.geoAdd(key,116.40,39.90,"蝙蝠侠");
-        redisUtil.geoAdd(key,116.38,39.90,"大侠");
-        redisUtil.geoAdd(key,116.30,39.95,"煎饼侠");
+    public void list(){
+        String key = "tttt";
+
+        redisUtil.set(key);
 
 
-        redisUtil.geoPos(key,"蜘蛛侠",20000);
-
-        redisUtil.geoPosWithDist(key,"蜘蛛侠",20000);
     }
 
 
