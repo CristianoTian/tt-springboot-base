@@ -24,6 +24,7 @@
         <module>tt-spring-mvcToboot</module>
         <module>tt-springboot-async</module>
         <module>tt-spring</module>
+        <module>tt-springboot-kafka</module>
     </modules>
 
 </project>
