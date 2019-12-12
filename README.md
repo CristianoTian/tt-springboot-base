@@ -19,6 +19,10 @@ springBoot 集成demo开发
     Step two: 创建逻辑实现类
     Step three: 配置自动注入Config
     Step four: 自定义META-INF --- spring.factories
+      why???
+        由于一般的项目启动类,会默认扫描当前包下@ComponentScan
+        但是自定义starter不一定和默认扫描包一致,就算是有@configuration 也不一定被扫描
+        所以一定要写 spring.factories , 让springboot 扫描注入spring容器
       
 3)集成redis开发
 

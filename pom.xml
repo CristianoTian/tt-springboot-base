@@ -25,6 +25,8 @@
         <module>tt-springboot-async</module>
         <module>tt-spring</module>
         <module>tt-springboot-kafka</module>
+        <module>tt-springboot-common</module>
+        <module>tt-demo-starter</module>
     </modules>
 
 </project>
