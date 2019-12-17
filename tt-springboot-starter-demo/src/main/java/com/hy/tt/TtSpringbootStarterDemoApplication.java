@@ -4,6 +4,7 @@ import com.hy.ttt.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,8 +24,17 @@ public class TtSpringbootStarterDemoApplication {
 
     @RequestMapping("/")
     private String index(){
-      return   demoService.getObject();
+        String a = "123";
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
+        String encode = bCryptPasswordEncoder.encode(a);
+        System.out.println(encode);
+        boolean matches = bCryptPasswordEncoder.matches("123", encode);
+        System.out.println(matches);
+        boolean matches1 = bCryptPasswordEncoder.matches("1234", encode);
+        System.out.println(matches1);
+        return   demoService.getObject();
 
 //        return starterHelloService.getName() + starterHelloService.getHobby();
+
     }
 }
