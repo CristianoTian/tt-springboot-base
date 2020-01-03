@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * @auther thy
  * @date 2019/11/11
  */
-public class DateUtil {
+public class DateUtils {
 
     private static  final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
     private static  final String YYYY_MM_DD = "yyyy-MM-dd";
