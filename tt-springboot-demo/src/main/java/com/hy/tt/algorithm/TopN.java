@@ -102,5 +102,6 @@ public class TopN {
         topN.findTopN(5, arr1);
         System.out.println("调整后数组：");
         topN.print(arr1);
+
     }
 }
