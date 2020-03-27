@@ -27,6 +27,7 @@
         <module>tt-springboot-kafka</module>
         <module>tt-springboot-common</module>
         <module>tt-demo-starter</module>
+        <module>tt-springboot-exception</module>
     </modules>
 
 </project>
