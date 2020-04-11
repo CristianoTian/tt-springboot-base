@@ -6,6 +6,7 @@ import com.hy.tt.mode.chain.service.impl.SuccessReceiptHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author thy
@@ -23,8 +24,20 @@ public class ReceiptHandlerContainer {
 
     public static List<IReceiptHandler> getReceiptHandlerList(){
         List<IReceiptHandler> receiptHandlerList = new ArrayList<>();
-        receiptHandlerList.add(new SuccessReceiptHandler());
-        receiptHandlerList.add(new ErrorReceiptHandler());
+//        receiptHandlerList.add(new SuccessReceiptHandler());
+//        receiptHandlerList.add(new ErrorReceiptHandler());
+
+        //获取IReceiptHandler接口的实现类
+        Set<Class<?>> classList = ReflectionUtil.getClassSetBySuper(IReceiptHandler.class);
+        if (classList != null && classList.size() > 0) {
+            for (Class<?> clazz : classList) {
+                try {
+                    receiptHandlerList.add((IReceiptHandler)clazz.newInstance());
+                } catch ( Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return receiptHandlerList;
     }
 }
