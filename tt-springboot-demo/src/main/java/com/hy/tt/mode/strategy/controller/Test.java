@@ -1,6 +1,6 @@
 package com.hy.tt.mode.strategy.controller;
 
-import com.hy.tt.mode.strategy.service.HelloServiceImpl;
+import com.hy.tt.mode.strategy.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Test {
 
     @Autowired
-    private HelloServiceImpl helloService;
+    private HelloService helloService;
 
     @GetMapping("/sya")
     public String say(@RequestParam String num){

@@ -17,7 +17,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class HandlerProcesser implements BeanFactoryPostProcessor {
 
-    private static final String HANDLER_PACKAGE ="com.hy.tt.strategyMode";
+    private static final String HANDLER_PACKAGE ="com.hy.tt.mode.strategy.config";
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         Map<String ,Class> handlerMap = new HashMap<>();
