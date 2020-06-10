@@ -2,10 +2,7 @@ package com.hy.tt;
 
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,21 +13,23 @@ import java.util.stream.Stream;
 public class Test {
 
     public static void main(String[] args) {
-        List<String> s = new ArrayList<>();
-        Set<String> set = new HashSet<>();
-        String a = "123213";
-        s.add(a);
-        s.add("dgfdsfsf");
-        s.add("SFDSFsdfdsf");
-        s.add(a);
-//        System.out.println(s.toString());
-//        set.add(a);
-//        set.add("dgfdsfsf");
-//        set.add("SFDSFsdfdsf");
-//        set.add(a);
-//        System.out.println(set.toString());
+        List<Student> s = new ArrayList<>();
+        Student s1 = new Student("tt4",4);
+        Student s2 = new Student("tt2",2);
+        Student s3 = new Student("tt3",3);
+        Student s4 = new Student("tt1",1);
+        s.add(s1); s.add(s2);s.add(s3);s.add(s4);
 
-        System.out.println(s.stream().distinct());
+        List<Student> sortList1 = s.stream()
+                .sorted((a, b) -> a.getSortNum().compareTo(b.getSortNum()))
+                .collect(Collectors.toList());
+
+        for(Student ss : sortList1){
+            System.out.println("name:" + ss.getName() + "sortNum:" + ss.getSortNum());
+        }
+
+        System.out.println(System.getProperty("os.name").toLowerCase());
+
 
     }
 }
