@@ -28,6 +28,7 @@
         <module>tt-springboot-common</module>
         <module>tt-demo-starter</module>
         <module>tt-springboot-exception</module>
+        <module>tt-springboot-dataway</module>
     </modules>
 
 </project>
