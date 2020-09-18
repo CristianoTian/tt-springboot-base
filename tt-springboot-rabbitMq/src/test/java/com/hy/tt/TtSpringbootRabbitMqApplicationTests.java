@@ -18,6 +18,7 @@ public class TtSpringbootRabbitMqApplicationTests {
     @Test
     public void contextLoads() {
         rabbitSender.sendRabbitmqDirect(RabbitUtil.EXCHANGE_TWO,RabbitUtil.QUEUE_TWO,RabbitUtil.ROUTE_TWO,"Hello RabbitMq TWO11");
+//        rabbitSender.sendRabbitmqDirect(RabbitUtil.TEMP_EXCHANGE_TWO,RabbitUtil.TEMP_QUEUE_TWO,false,RabbitUtil.TEMP_ROUTE_TWO,"Hello RabbitMq durable false");
     }
 
 //    @Test

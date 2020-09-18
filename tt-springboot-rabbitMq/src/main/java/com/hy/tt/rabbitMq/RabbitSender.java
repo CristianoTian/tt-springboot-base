@@ -8,6 +8,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.UUID;
@@ -18,29 +20,45 @@ import java.util.UUID;
  */
 @Slf4j
 @Component
-public class RabbitSender implements RabbitTemplate.ConfirmCallback {
+public class RabbitSender implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {
 
     @Autowired
     private RabbitAdmin rabbitAdmin;
     //由于rabbitTemplate的scope属性设置为ConfigurableBeanFactory.SCOPE_PROTOTYPE，所以不能自动注入
     //构造方法注入
     //rabbitTemplate如果为单例的话，那回调就是最后设置的内容
-    private RabbitTemplate rabbitTemplate;
     @Autowired
-    public RabbitSender(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-        this.rabbitTemplate.setConfirmCallback(this);
+    private RabbitTemplate rabbitTemplate;
+
+    @PostConstruct
+    public void init() {
+        rabbitTemplate = rabbitTemplate;
+        rabbitTemplate.setConfirmCallback(this::confirm);
+        rabbitTemplate.setReturnCallback(this::returnedMessage);
     }
 
+    /**
+     * 发送没有的交换机就会失败
+     * @param correlationData
+     * @param b
+     * @param s
+     */
     @Override
     public void confirm(CorrelationData correlationData, boolean b, String s) {
         log.info("confirm: " + correlationData.getId());
         if (b) {
-            log.info("消息成功消费");
+            log.info("消息发送到交换机成功");
         } else {
-            log.info("消息消费失败:" + s);
+            log.info("消息发送到交换机失败:" + s);
         }
     }
+
+    @Override
+    public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+        log.info("returnedMessage回调方法>>>" + new String(message.getBody(), StandardCharsets.UTF_8) + ",replyCode:" + replyCode
+                + ",replyText:" + replyText + ",exchange:" + exchange + ",routingKey:" + routingKey);
+    }
+
 
     /**
      * Direct模式
@@ -51,6 +69,23 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback {
         if(queueProperties == null){
             rabbitAdmin.declareExchange(new DirectExchange(exchange));
             rabbitAdmin.declareQueue(new Queue(queue));
+            rabbitAdmin.declareBinding(new Binding(queue, Binding.DestinationType.QUEUE,exchange,routeKey,new HashMap<>()));
+        }
+
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        log.info("send: " + correlationData.getId());
+        this.rabbitTemplate.convertAndSend(exchange, routeKey , obj, correlationData);
+    }
+
+    /**
+     * Direct模式
+     */
+    public void sendRabbitmqDirect(String exchange, String queue, Boolean queueDurable,String routeKey,Object obj) {
+
+        Properties queueProperties = rabbitAdmin.getQueueProperties(queue);
+        if(queueProperties == null){
+            rabbitAdmin.declareExchange(new DirectExchange(exchange));
+            rabbitAdmin.declareQueue(new Queue(queue,queueDurable));
             rabbitAdmin.declareBinding(new Binding(queue, Binding.DestinationType.QUEUE,exchange,routeKey,new HashMap<>()));
         }
 

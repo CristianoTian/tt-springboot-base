@@ -55,65 +55,65 @@ public class RabbitConfig {
     private String password;
 
 
-    // 构建mq实例工厂
-    @Bean
-    public ConnectionFactory connectionFactory(){
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
-        connectionFactory.setHost(host);
-        connectionFactory.setPort(port);
-        connectionFactory.setUsername(username);
-        connectionFactory.setPassword(password);
-        connectionFactory.setPublisherConfirms(true);
-        connectionFactory.setVirtualHost("/");
-        return connectionFactory;
-    }
-
+//    // 构建mq实例工厂
+//    @Bean
+//    public ConnectionFactory connectionFactory(){
+//        CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+//        connectionFactory.setHost(host);
+//        connectionFactory.setPort(port);
+//        connectionFactory.setUsername(username);
+//        connectionFactory.setPassword(password);
+//        connectionFactory.setPublisherConfirms(true);
+//        connectionFactory.setVirtualHost("/");
+//        return connectionFactory;
+//    }
+//
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
         return new RabbitAdmin(connectionFactory);
     }
 
-    @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)//TODO why ? 每次注入的时候回自动创建一个新的bean实例
-    public RabbitTemplate rabbitTemplate(){
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        return rabbitTemplate;
-    }
+//    @Bean
+//    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)//TODO why ? 每次注入的时候回自动创建一个新的bean实例
+//    public RabbitTemplate rabbitTemplate(){
+//        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
+//        return rabbitTemplate;
+//    }
 
-    /**
-     * 单一消费者
-     * @return
-     */
-    @Bean(name = "singleListenerContainer")
-    public SimpleRabbitListenerContainerFactory listenerContainer(){
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory());
-//        factory.setMessageConverter(new Jackson2JsonMessageConverter());
-        factory.setConcurrentConsumers(1);
-        factory.setMaxConcurrentConsumers(1);
-        factory.setPrefetchCount(1);
-        factory.setTxSize(1);
-        factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
-        return factory;
-    }
-
-
-    /**
-     * 多个消费者
-     * @return
-     */
-    @Bean(name = "multiListenerContainer")
-    public SimpleRabbitListenerContainerFactory multiListenerContainer(){
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-        factoryConfigurer.configure(factory,connectionFactory());
-//        factory.setMessageConverter(new Jackson2JsonMessageConverter());
-        factory.setAcknowledgeMode(AcknowledgeMode.NONE);
-        factory.setConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.concurrency",int.class));
-        factory.setMaxConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.max-concurrency",int.class));
-        factory.setPrefetchCount(env.getProperty("spring.rabbitmq.listener.prefetch",int.class));
-        return factory;
-    }
-
+//    /**
+//     * 单一消费者
+//     * @return
+//     */
+//    @Bean(name = "singleListenerContainer")
+//    public SimpleRabbitListenerContainerFactory listenerContainer(){
+//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+//        factory.setConnectionFactory(connectionFactory());
+////        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+//        factory.setConcurrentConsumers(1);
+//        factory.setMaxConcurrentConsumers(1);
+//        factory.setPrefetchCount(1);
+//        factory.setTxSize(1);
+//        factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
+//        return factory;
+//    }
+//
+//
+//    /**
+//     * 多个消费者
+//     * @return
+//     */
+//    @Bean(name = "multiListenerContainer")
+//    public SimpleRabbitListenerContainerFactory multiListenerContainer(){
+//        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+//        factoryConfigurer.configure(factory,connectionFactory());
+////        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+//        factory.setAcknowledgeMode(AcknowledgeMode.NONE);
+//        factory.setConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.concurrency",int.class));
+//        factory.setMaxConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.max-concurrency",int.class));
+//        factory.setPrefetchCount(env.getProperty("spring.rabbitmq.listener.prefetch",int.class));
+//        return factory;
+//    }
+//
 
 
 }

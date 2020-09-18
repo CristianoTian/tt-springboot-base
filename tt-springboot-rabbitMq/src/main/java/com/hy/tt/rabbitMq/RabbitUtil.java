@@ -18,6 +18,17 @@ public class RabbitUtil {
 
 
     /**
+     * direct
+     */
+    //交换机名称
+    public static final String TEMP_EXCHANGE_TWO = "TEMP_EXCHANGETWOS";
+    //队列名称
+    public static final String TEMP_QUEUE_TWO = "TEMP_QUEUETWOS";
+    //routeKey
+    public static final String TEMP_ROUTE_TWO = "TEMP_ROUTETWOS";
+
+
+    /**
      * fanout
      */
     //交换机名称
