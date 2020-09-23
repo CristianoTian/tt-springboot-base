@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.hy.tt.mapper.UserMapper">
+	<resultMap id="UserResultMap" type="com.hy.tt.entity.User">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="age" property="age"/>
+		<result column="address" property="address"/>
+		<result column="description" property="description"/>
+		<result column="test_id" property="testId"/>
+		<result column="create_time" property="createTime"/>
+		<result column="modify_time" property="modifyTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		id,name,age,address,description,test_id,create_time,modify_time
+	</sql>
+
+	<select id="getById"  resultMap="UserResultMap">
+		select
+		<include refid="columns" />
+		from  user
+		where
+		id = #{id}
+	</select>
+
+
+	<insert id="insert" parameterType="com.hy.tt.entity.User" useGeneratedKeys="true" keyProperty="id">
+		insert into  user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			<if test="name != null">
+				name,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="testId != null">
+				test_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="modifyTime != null">
+				modify_time,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+
+			<if test="name != null">
+				#{name},
+			</if>
+			<if test="age != null">
+				#{age},
+			</if>
+			<if test="address != null">
+				#{address},
+			</if>
+			<if test="description != null">
+				#{description},
+			</if>
+			<if test="testId != null">
+				#{testId},
+			</if>
+			<if test="createTime != null">
+				#{createTime},
+			</if>
+			<if test="modifyTime != null">
+				#{modifyTime},
+			</if>
+		</trim>
+	</insert>
+
+
+	<select id="getAll" resultMap="UserResultMap">
+		select
+		<include refid="columns" />
+		from  user
+		order by
+		id
+		desc
+	</select>
+
+
+</mapper>
+
