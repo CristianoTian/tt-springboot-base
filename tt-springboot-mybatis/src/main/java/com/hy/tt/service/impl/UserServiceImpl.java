@@ -5,6 +5,7 @@ import com.hy.tt.mapper.UserMapper;
 import com.hy.tt.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     UserMapper userMapper;
 
+
     @Override
+    @Transactional
     public User getById(Long id) {
         return userMapper.getById(id);
     }

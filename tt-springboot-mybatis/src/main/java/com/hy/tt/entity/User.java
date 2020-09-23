@@ -1,12 +1,13 @@
 package com.hy.tt.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * @author thy
  * @date 2020/9/22
  */
-public class User {
+public class User implements Serializable {
 
     private Long id;
     private String name;
